@@ -1,4 +1,4 @@
-import { listOfOrchirds } from "../../shares/listOfOrchids";
+import { listOfOrchids } from "../../shares/listOfOrchids";
 import OrchidItem from "../OrchidItem";
 import "./style.css"
 
@@ -7,7 +7,7 @@ function Orchid() {
         <>  
             <div className="container">
                 <div className="orchid--list">
-                    {listOfOrchirds.map((orchid) => (
+                    {listOfOrchids.map((orchid) => (
                         <OrchidItem key={orchid.id} orchid={orchid}/>
                     ))}
                 </div>

@@ -5,7 +5,7 @@ function OrchidItem({ orchid }) {
         <>
             <div className="orchid--list__item">
                 <div className="orchid--list__image">
-                    <img src={orchid.url} alt="" />
+                    <img src={orchid.image} alt="" />
                 </div>
                 <div className="orchid--list__content">
                     <h2 className="orchid--list__name">
