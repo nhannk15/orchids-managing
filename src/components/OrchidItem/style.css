@@ -3,7 +3,7 @@
     margin-bottom: 20px;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 1px 1px 6px 1px gray;
+    box-shadow: var(--shadow);
 }
 
 .orchid--list__image img {
@@ -14,4 +14,17 @@
 
 .orchid--list__content {
     margin: 20px;
+}
+
+.orchid--list__desc {
+    max-height: 200px;
+    opacity: 1;
+    overflow: hidden;
+    transition: all 0.5s ease 0.2s;
+}
+
+.orchid--list__desc.hidden {
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.5s ease 0.2s;
 }
