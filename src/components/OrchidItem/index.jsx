@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./style.css"
 
-function OrchidItem({ orchid }) {
+function OrchidItem({ orchid, setOrchid }) {
 
     const [view, setView] = useState(true);
     return (
@@ -17,7 +17,7 @@ function OrchidItem({ orchid }) {
                     <p className={`orchid--list__desc ${view ? "hidden" : ""}`}>
                         {orchid.desc}
                     </p>
-                    <button onClick={() => {setView(!view)}}>
+                    <button onClick={() => {setOrchid(orchid)}}>
                         {view == true ? "View Details": "Close details"}
                     </button>
                 </div>
