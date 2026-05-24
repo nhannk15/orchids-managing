@@ -5,13 +5,16 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import Header from './components/Header'
 import LayoutDefault from './components/LayoutDefault'
+import { ThemeProvider } from './context/ThemeContext'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <LayoutDefault />
+      <ThemeProvider>
+        <LayoutDefault />
+      </ThemeProvider>
     </>
   )
 }
