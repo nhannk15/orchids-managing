@@ -18,10 +18,18 @@ function Header() {
                     </div>
                     <div className="header--menu">
                         <ul className="header--menu__list">
-                            <li className="header--menu__item">Home</li>
-                            <li className="header--menu__item">About</li>
-                            <li className="header--menu__item">Contact us</li>
-                            <li className="header--menu__item">Home</li>
+                            <li className="header--menu__item">
+                                <a href="/home">Home</a>
+                            </li>
+                            <li className="header--menu__item">
+                                <a href="/about">About</a>
+                            </li>
+                            <li className="header--menu__item">
+                                <a href="contact">Contact</a>
+                            </li>
+                            <li className="header--menu__item">
+                                <a href="/orchid">Orchid</a>
+                            </li>
                             <li className="header--menu__item"><button onClick={toggleTheme}>Change theme</button></li>
                         </ul>
                     </div>

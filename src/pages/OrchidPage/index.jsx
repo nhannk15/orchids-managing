@@ -4,7 +4,7 @@ import Orchid from "../../components/Orchid";
 function OrchidPage() {
     return (
         <>
-            OrchidPage
+            <Orchid />
         </>
     )
 }
