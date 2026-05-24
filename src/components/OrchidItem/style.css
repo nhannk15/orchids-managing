@@ -1,0 +1,17 @@
+.orchid--list__item {
+    width: 32%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 1px 1px 6px 1px gray;
+}
+
+.orchid--list__image img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.orchid--list__content {
+    margin: 20px;
+}
