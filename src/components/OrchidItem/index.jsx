@@ -1,6 +1,9 @@
+import { useState } from "react";
 import "./style.css"
 
 function OrchidItem({ orchid }) {
+
+    const [view, setView] = useState(true);
     return (
         <>
             <div className="orchid--list__item">
@@ -11,9 +14,12 @@ function OrchidItem({ orchid }) {
                     <h2 className="orchid--list__name">
                         {orchid.name}
                     </h2>
-                    <p className="orchid--list__desc">
+                    <p className={`orchid--list__desc ${view ? "hidden" : ""}`}>
                         {orchid.desc}
                     </p>
+                    <button onClick={() => {setView(!view)}}>
+                        {view == true ? "View Details": "Close details"}
+                    </button>
                 </div>
             </div>
         </>
