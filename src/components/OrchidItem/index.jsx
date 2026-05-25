@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./style.css"
+import { Link } from "react-router-dom";
 
 function OrchidItem({ orchid, setOrchid }) {
 
@@ -17,9 +18,12 @@ function OrchidItem({ orchid, setOrchid }) {
                     <p className={`orchid--list__desc ${view ? "hidden" : ""}`}>
                         {orchid.desc}
                     </p>
-                    <button onClick={() => {setOrchid(orchid)}}>
+                    {/* <button onClick={() => {setOrchid(orchid)}}>
                         {view == true ? "View Details": "Close details"}
-                    </button>
+                    </button> */}
+                    <Link to={"/orchid/" + orchid.id}>
+                        <button>View details</button>
+                    </Link>
                 </div>
             </div>
         </>
