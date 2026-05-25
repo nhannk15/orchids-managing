@@ -33,7 +33,7 @@
 
 /* Attribute Selector */
 [data-theme="dark"] {
-  --text: #9ca3af;
+  --text: white;
   --text-h: #f3f4f6;
   --bg: rgb(34, 34, 34);
   --border: #2e303a;

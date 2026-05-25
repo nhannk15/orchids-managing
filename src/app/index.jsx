@@ -1,4 +1,5 @@
 import LayoutDefault from "../components/LayoutDefault";
+import OrchidDetail from "../components/OrchidDetail";
 import AboutPage from "../pages/AboutPage";
 import ContactPage from "../pages/ContactPage";
 import HomePage from "../pages/HomePage";
@@ -25,6 +26,10 @@ export const allRoutes = [
             {
                 path: "/orchid",
                 element: <OrchidPage />
+            },
+            {
+                path: "/orchid/:id",
+                element: <OrchidDetail />
             },
             {
                 path: "/about",
