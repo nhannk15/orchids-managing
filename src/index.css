@@ -10,7 +10,7 @@
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -33,7 +33,7 @@
 
 /* Attribute Selector */
 [data-theme="dark"] {
-  --text: #9ca3af;
+  --text: white;
   --text-h: #f3f4f6;
   --bg: rgb(34, 34, 34);
   --border: #2e303a;
@@ -43,7 +43,8 @@
   --accent-border: rgba(192, 132, 252, 0.5);
   --social-bg: rgba(47, 48, 58, 0.5);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+ rgba(0, 0, 0, 0.5) 0px 10px 30px,
+  rgba(255, 255, 255, 0.03) 0px 1px 0px inset;
   --header-bg: #1a1a2e;
 }
 
