@@ -1,5 +1,6 @@
 import LayoutDefault from "../components/LayoutDefault";
 import OrchidDetail from "../components/OrchidDetail";
+import SpecialOrchid from "../components/SpecialOrchid";
 import AboutPage from "../pages/AboutPage";
 import ContactPage from "../pages/ContactPage";
 import HomePage from "../pages/HomePage";
@@ -25,7 +26,7 @@ export const allRoutes = [
             },
             {
                 path: "/orchid",
-                element: <OrchidPage />
+                element: <OrchidPage />,
             },
             {
                 path: "/orchid/:id",
@@ -34,6 +35,10 @@ export const allRoutes = [
             {
                 path: "/about",
                 element: <AboutPage />
+            },
+            {
+                path: "/orchid/special",
+                element: <SpecialOrchid />,
             }
         ]
     },
