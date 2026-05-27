@@ -80,7 +80,7 @@ export const listOfOrchids = [
   {
     id: '7',
     name: 'Lan dendro',
-    desc: 'Lan dendro có sức sống mạnh mẽ và màu sắc đa dạng.',
+    desc: 'Lan dendro có sức sống mạnh mẽ như những vũ công Samba và màu sắc đa dạng.',
     rating: 3,
     isSpecial: false,
     isNatural: true,
@@ -106,7 +106,7 @@ export const listOfOrchids = [
   {
     id: '9',
     name: 'Lan cattleya',
-    desc: 'Cattleya được mệnh danh là nữ hoàng của các loài hoa lan.',
+    desc: 'Cattleya được mệnh danh là nữ hoàng của các loài hoa lan, là công chúa của các loài hoa đẹp.',
     rating: 5,
     isSpecial: true,
     isNatural: true,
