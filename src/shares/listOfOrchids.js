@@ -1,5 +1,4 @@
-export const listOfOrchids = [
-  {
+export const listOfOrchids = [{
     id: '1',
     name: 'Hoa lan tím',
     desc: 'Loài hoa lan mang sắc tím dịu dàng, tượng trưng cho sự thủy chung và sang trọng.',
