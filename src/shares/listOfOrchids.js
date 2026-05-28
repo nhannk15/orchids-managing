@@ -105,7 +105,7 @@ export const listOfOrchids = [{
   {
     id: '9',
     name: 'Lan cattleya',
-    desc: 'Cattleya được mệnh danh là nữ hoàng của các loài hoa lan, là công chúa của các loài hoa đẹp.',
+    desc: 'Cattleya được mệnh danh là nữ hoàng của các loài hoa lan, công chúa của các loài hoa.',
     rating: 5,
     isSpecial: true,
     isNatural: true,

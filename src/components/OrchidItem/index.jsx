@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./style.css"
 import { Link } from "react-router-dom";
-import { Avatar, Box, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Rating, Typography } from "@mui/material";
+import { Avatar, Box, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Rating, Skeleton, Typography } from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
@@ -23,7 +23,7 @@ function OrchidItem({ orchid, setOrchid }) {
     }
 
     return (
-        <>
+        <>  
             <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4 }}>
                 <Card>
                     <CardHeader
