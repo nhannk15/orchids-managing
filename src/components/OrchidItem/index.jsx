@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./style.css"
 import { Link } from "react-router-dom";
-import { Avatar, Box, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Rating, Typography } from "@mui/material";
+import { Avatar, Box, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Rating, Skeleton, Typography } from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share"
+import ShareIcon from "@mui/icons-material/Share";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 function OrchidItem({ orchid, setOrchid }) {
 
@@ -22,12 +23,12 @@ function OrchidItem({ orchid, setOrchid }) {
     }
 
     return (
-        <>
+        <>  
             <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4 }}>
                 <Card>
                     <CardHeader
                         sx={{ textAlign: "left" }}
-                        avatar={<Avatar>R</Avatar>}
+                        avatar={<Avatar>N</Avatar>}
                         action={<IconButton><MoreVertIcon /></IconButton>}
                         title={orchid.name}
                         subheader={"Origin: " + orchid.origin}
@@ -50,20 +51,38 @@ function OrchidItem({ orchid, setOrchid }) {
                         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <IconButton onClick={handleLike}>
                                 {isLiked == true ? (
-                                    <FavoriteIcon color="error"/>
+                                    <FavoriteIcon color="error" />
                                 ) : (
                                     <FavoriteIcon />
                                 )}
                             </IconButton>
 
-                            <Typography>
+                            <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
                                 {numberOfLikes}
                             </Typography>
                         </Box>
 
-                        <IconButton>
-                            <ShareIcon />
-                        </IconButton>
+                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <IconButton >
+                                <ShareIcon />
+                            </IconButton>
+
+                            <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
+                                Share
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <Link to={"/orchid/" + orchid.id}>
+                                <IconButton>
+                                    <InfoOutlinedIcon />
+                                </IconButton>
+                            </Link>
+
+                            <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
+                                Info
+                            </Typography>
+                        </Box>
                     </CardActions>
                 </Card>
             </Grid>
