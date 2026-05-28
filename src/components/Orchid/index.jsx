@@ -156,7 +156,8 @@ function Orchid() {
                         <OrchidItem
                             key={orchid.id}
                             orchid={orchid}
-                            setOrchid={setOrchid}
+                            setOrchid={setOrchid} 
+                            setLoading={setLoading}
                         />
                     ))
                 }
