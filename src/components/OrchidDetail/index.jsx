@@ -1,11 +1,21 @@
 import { useParams } from "react-router-dom";
-import { listOfOrchids } from "../../shares/listOfOrchids"
 import "./style.css"
+import { doGet } from "../../service/orchidService";
+import { useEffect, useState } from "react";
 function OrchidDetail() {
 
+    const [orchid, setOrchid] = useState({});
+
     const { id } = useParams();
-    const orchid = listOfOrchids.find((item) => item.id === id);
-    console.log(orchid);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const responseData = await doGet(`/${id}`);
+            setOrchid(responseData);
+        }
+        fetchData();
+    }, []);
+
     return (
         <>
             <div className="container">
