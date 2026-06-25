@@ -6,17 +6,22 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { doDelete, doPatch } from "../../service/orchidService";
 
 const style = {
     position: 'absolute',
-    top: '50%',
+    top: 0,
     left: '50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translateX(-50%)',
     width: 400,
     bgcolor: 'background.paper',
     borderRadius: "16px",
     boxShadow: 24,
-    padding: "40px"
+    padding: "40px 40px",
+    maxHeight: '100vh',
+    overflowY: 'auto',
+    overflowX: 'none',
+    boxSizing: 'border-box',
 };
 
 function OrchidItem({ orchid, setOrchid, setLoading }) {
@@ -29,28 +34,13 @@ function OrchidItem({ orchid, setOrchid, setLoading }) {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const deleteData = async () => {
-        const response = await fetch(`https://6a169f001b90031f81b140d7.mockapi.io/orchids/${orchid.id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        const data = await response.json();
-        console.log(data);
+        await doDelete(`/${orchid.id}`);
         handleClose();
         setLoading(true);
     }
 
     const patchData = async () => {
-        const response = await fetch(`https://6a169f001b90031f81b140d7.mockapi.io/orchids/${orchid.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newFlower)
-        });
-        const data = await response.json();
-        console.log(data);
+        await doPatch(`/${orchid.id}`, newFlower);
         handleClose();
         setLoading(true);
     }
@@ -248,7 +238,7 @@ function OrchidItem({ orchid, setOrchid, setLoading }) {
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >
-                <Box component={"form"} sx={{ ...style, width: 400, display: "flex", justifyContent: "center", flexDirection: "column", textAlign: "center" }}>
+                <Box component={"form"} sx={{ ...style, marginTop: "20px" }}>
                     <h2>Add a new flower</h2>
                     <TextField
                         defaultValue={orchid.name}
