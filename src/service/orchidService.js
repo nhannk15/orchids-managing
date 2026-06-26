@@ -33,9 +33,9 @@ export const doDelete = async (url) => {
     }
 }
 
-export const doPatch = async (url, data) => {
+export const doPut = async (url, data) => {
     try {
-        const response = await axios.patch(`${API}${url}`);
+        const response = await axios.put(`${API}${url}`, data);
         return response.data;
     } catch (error) {
         console.log("Error: " + error);

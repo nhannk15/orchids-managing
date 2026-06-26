@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { debounce } from "lodash";
 import { doGet, doPost } from "../../service/orchidService";
 import AddFlowerModal from "../AddFlowerModal";
+import UpdateFlowerModal from "../UpdateFlowerModal";
 
 function Orchid() {
 
@@ -18,7 +19,6 @@ function Orchid() {
     const [open, setOpen] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [formError, setFormError] = useState(false);
-    const [orchid, setOrchid] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -61,7 +61,6 @@ function Orchid() {
                         <OrchidItem
                             key={orchid.id}
                             orchid={orchid}
-                            setOrchid={setOrchid}
                             setLoading={setLoading}
                         />
                     ))
@@ -81,6 +80,8 @@ function Orchid() {
                 setLoading={setLoading}
                 submitting={submitting}
                 setSubmitting={setSubmitting} />
+
+
         </>
     )
 }
