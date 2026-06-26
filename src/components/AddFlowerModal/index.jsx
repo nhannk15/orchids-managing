@@ -9,7 +9,7 @@ const cardStyle = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 1000,
+    width: 800,
     maxHeight: '90vh',
     overflowY: 'auto',
     borderRadius: "16px",
@@ -200,7 +200,7 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
                                         </Typography>
                                         <Checkbox
                                             name="isSpecial"
-                                            value={formik.values.isSpecial}
+                                            checked={formik.values.isSpecial}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} />
                                     </Box>
@@ -211,10 +211,11 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
                                         </Typography>
                                         <Checkbox
                                             name="isNatural"
-                                            value={formik.values.isNatural}
+                                            checked={formik.values.isNatural}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} />
                                     </Box>
+                                    
                                 </Box>
                             </Box>
                         </Box>

@@ -17,6 +17,7 @@
     "@mui/icons-material": "^9.0.1",
     "@mui/material": "^9.0.1",
     "@mui/styled-engine-sc": "^9.0.1",
+    "@react-oauth/google": "^0.13.5",
     "axios": "^1.18.1",
     "firebase": "^12.15.0",
     "formik": "^2.4.9",
