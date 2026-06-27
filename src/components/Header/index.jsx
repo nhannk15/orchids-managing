@@ -12,8 +12,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
+import useUserStore from '../../store/useUserStore';
+import Login from '../Login';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -22,6 +24,11 @@ function Header() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const { theme, toggleTheme } = useTheme();
+    const navigate = useNavigate();
+    const doLogout = () => {
+        logout();
+        navigate("/home");
+    }
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -38,6 +45,11 @@ function Header() {
         setAnchorElUser(null);
     };
 
+
+
+    const user = useUserStore((state) => state.user);
+    const logout = useUserStore((state) => state.logout);
+
     return (
         <AppBar position="static" color='secondary'>
             <Container maxWidth="xl">
@@ -47,7 +59,7 @@ function Header() {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
+                        href="/orchid"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -144,10 +156,13 @@ function Header() {
                         </Link>
 
                     </Box>
-                    <Box sx={{ flexGrow: 0 }}>
+                    {user == null ? (
+                        <Login />
+                    ) : (
+                        <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Remy Sharp" src={user == null ? "/static/images/avatar/2.jpg" : user.avatar} />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -173,8 +188,15 @@ function Header() {
                                 </Typography>
                             </MenuItem>
 
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography onClick={doLogout} sx={{ textAlign: 'center' }}>
+                                    Logout
+                                </Typography>
+                            </MenuItem>
+
                         </Menu>
                     </Box>
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>
