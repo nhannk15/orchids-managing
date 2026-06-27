@@ -1,0 +1,43 @@
+.orchid--detail {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+
+    &__image {
+        img {
+            height: 100%;
+        }
+    }
+
+    &__content {
+        padding: 15px 30px 15px 30px;
+        text-align: left;
+    }
+
+    &__orchid {
+        margin: 0px;
+    }
+
+    &__row {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    &__col {
+        display: flex;
+        width: 100%;
+        justify-content: left;
+        gap: 5px;
+    }
+
+    &__buttons {
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
