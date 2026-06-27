@@ -8,9 +8,12 @@ import ShareIcon from "@mui/icons-material/Share";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { doDelete } from "../../service/orchidService";
 import UpdateFlowerModal from "../UpdateFlowerModal";
+import useUserStore from '../../store/useUserStore';
 
 
 function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
+
+    const user = useUserStore((state) => state.user);
 
     const [view, setView] = useState(true);
     const [numberOfLikes, setNumberOfLikes] = useState(orchid.numberOfLike);
@@ -60,20 +63,22 @@ function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
                 <Card>
                     <CardHeader
                         sx={{ textAlign: "left" }}
-                        avatar={<Avatar>N</Avatar>}
-                        action={<IconButton onClick={handleMenuOpen}><MoreVertIcon /></IconButton>}
+                        avatar={<Avatar src="https://yt3.googleusercontent.com/ytc/AIdro_lphR7IgKMrsh-RwEVXL2XEvnQ8rb9Qb-a04v-yZJtM_ZQ=s160-c-k-c0x00ffffff-no-rj"></Avatar>}
+                        action={(user != null && user.role == "ADMIN") && (<IconButton onClick={handleMenuOpen}><MoreVertIcon /></IconButton>)}
                         title={orchid.name}
                         subheader={"Origin: " + orchid.origin}
                     />
+                    {(user != null && user.role == "ADMIN") && (
+                        <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleMenuClose}>
+                            <MenuItem onClick={deleteData}>
+                                Delete
+                            </MenuItem>
+                            <MenuItem onClick={handleOpenModal}>
+                                Update
+                            </MenuItem>
+                        </Menu>
+                    )}
 
-                    <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleMenuClose}>
-                        <MenuItem onClick={deleteData}>
-                            Delete
-                        </MenuItem>
-                        <MenuItem onClick={handleOpenModal}>
-                            Update
-                        </MenuItem>
-                    </Menu>
 
                     <CardMedia
                         component={"img"}

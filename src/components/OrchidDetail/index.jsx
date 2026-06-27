@@ -51,7 +51,7 @@ function OrchidDetail() {
                         <h2 className="orchid--detail__name">
                             {orchid.name}
                         </h2>
-                        <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly />
+                        <Rating name="half-rating-read" precision={0.5} readOnly value={Number(orchid.rating)}/>
                         <p className="orchid--detail__desc">
                             {orchid.desc}
                         </p>
