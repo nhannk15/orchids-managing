@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import OrchidItem from "../OrchidItem";
 import "./style.css"
-import { Box, Button, Checkbox, CircularProgress, Fab, Grid, Modal, Rating, Skeleton, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Checkbox, CircularProgress, Fab, FormControl, Grid, InputLabel, MenuItem, Modal, Rating, Select, Skeleton, Stack, TextField, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { NumberField as BaseNumberField } from '@base-ui/react/number-field';
 import { CheckBox } from "@mui/icons-material";
@@ -19,6 +19,7 @@ function Orchid() {
     const [open, setOpen] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [formError, setFormError] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,8 +47,56 @@ function Orchid() {
         setFormError(null);
     }
 
+    const handleSearch = useCallback(
+        debounce(async (value) => {
+            try {
+                const responseData = await doGet("?search=" + value);
+                setListOfOrchids(responseData);
+            } catch (error) {
+                console.log("Error occured: " + error);
+                setListOfOrchids([]);
+            }
+        }, 500), []
+    );
+
     return (
         <>
+            <Box sx={{ paddingRight: "12.5%", paddingLeft: "12.5%", textAlign: "left" }}>
+                <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 0 }}>
+                    Collections
+                </Typography>
+                <Typography variant="h3" sx={{ marginTop: 0, marginBottom: 2 }}>
+                    Discovering the beauty of orchids
+                </Typography>
+
+                <TextField
+                    id="outlined-basic"
+                    label="Search by orchid's name"
+                    variant="outlined" sx={{ width: "50%" }}
+                    size="small"
+                    onChange={(event) => handleSearch(event.target.value)}
+                />
+                <FormControl>
+                    <InputLabel id="demo-simple-select-label">
+                        Category
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        size="small"
+                        label="Category"
+                        value={selectedCategory}
+                        sx={{ width: "170px" }}
+                        onChange={(event) => { setSelectedCategory(event.target.value) }}
+                    >
+                        <MenuItem value={0}>All Categories</MenuItem>
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                </FormControl>
+
+            </Box>
+
             <Grid container className="container" spacing={2} sx={{ marginTop: "30px" }} >
                 {loading ?
                     Array.from(new Array(6)).map((item, index) => (
@@ -57,13 +106,20 @@ function Orchid() {
                             <Skeleton width="60%" />
                             <Skeleton width="40%" />
                         </Grid>
-                    )) : listOfOrchids.map((orchid) => (
-                        <OrchidItem
-                            key={orchid.id}
-                            orchid={orchid}
-                            setLoading={setLoading}
-                        />
-                    ))
+                    )) : (
+                        (listOfOrchids.length == 0) ? (
+                            <>
+                                Your keyword doesn't match any orchids' name...
+                            </>
+                        ) : (
+                            listOfOrchids.map((orchid) => (
+                                <OrchidItem
+                                    key={orchid.id}
+                                    orchid={orchid}
+                                    setLoading={setLoading}
+                                />)
+
+                            )))
                 }
             </Grid>
 

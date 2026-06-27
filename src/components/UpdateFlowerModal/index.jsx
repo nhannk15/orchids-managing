@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, CardHeader, Checkbox, Modal, Rating, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, Checkbox, CircularProgress, Modal, Rating, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { doPut } from "../../service/orchidService";
@@ -56,7 +56,7 @@ const validationSchema = Yup.object({
 })
 
 
-function UpdateFlowerModal({ open, handleClose, orchid }) {
+function UpdateFlowerModal({ open, handleClose, orchid, setLoading, setSubmitting, submitting }) {
 
     const formik = useFormik({
         initialValues: {
@@ -80,7 +80,9 @@ function UpdateFlowerModal({ open, handleClose, orchid }) {
     });
 
     const handleSubmit = async (values, resetForm) => {
+        setSubmitting(true);
         await doPut(`/${orchid.id}`, values);
+        setLoading(true);
     }
 
     return (
@@ -233,8 +235,9 @@ function UpdateFlowerModal({ open, handleClose, orchid }) {
                                     variant="contained"
                                     color="secondary"
                                     type="submit"
+                                    startIcon={submitting && <CircularProgress size={20} color="inherit"/>}
                                 >
-                                    Update!!
+                                    {submitting ? "Updating" : "Update"}
                                 </Button>
                             </Box>
                         </Box>

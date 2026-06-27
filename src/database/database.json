@@ -1,0 +1,142 @@
+{
+    "orchids": [
+        {
+            "id": "1",
+            "name": "Hoa lan tím",
+            "desc": "Loài hoa lan mang sắc tím dịu dàng, tượng trưng cho sự thủy chung và sang trọng.",
+            "rating": 4,
+            "isSpecial": false,
+            "isNatural": true,
+            "image": "https://media.istockphoto.com/id/1369976302/vi/anh/n%E1%BB%81n-hoa-lan-t%C3%ADm-tuy%E1%BB%87t-%C4%91%E1%BA%B9p-phalaenopsis.jpg?s=612x612&w=0&k=20&c=mi4SEyT-DnABKrfiH9rKUusd1uZOsFBcMGCoV8zvSfI=",
+            "color": "purple",
+            "numberOfLike": 134,
+            "origin": "Vietnam",
+            "category": "Phalaenopsis"
+        },
+        {
+            "id": "2",
+            "name": "Hoa lan trắng",
+            "desc": "Hoa lan trắng biểu tượng cho sự tinh khiết, thanh lịch và nhẹ nhàng.",
+            "rating": 4,
+            "isSpecial": false,
+            "isNatural": true,
+            "image": "https://media.istockphoto.com/id/2174155023/vi/anh/plumeria-tr%E1%BA%AFng.jpg?s=612x612&w=0&k=20&c=49gGBA-nOtsPUMI4T1iEWio9bJhOog1WT4Mvs5Vb7Ew=",
+            "color": "white",
+            "numberOfLike": 98,
+            "origin": "Vietnam",
+            "category": "Phalaenopsis"
+        },
+        {
+            "id": "3",
+            "name": "Hoa lan vàng",
+            "desc": "Màu vàng rực rỡ thể hiện sự may mắn, giàu sang và thịnh vượng.",
+            "rating": 5,
+            "isSpecial": true,
+            "isNatural": true,
+            "image": "https://cdn.tgdd.vn/Files/2020/11/18/1307628/y-nghia-cua-hoa-lan-ngay-tet-co-truyen-viet-nam-202201101614276579.jpeg",
+            "color": "yellow",
+            "numberOfLike": 210,
+            "origin": "Vietnam",
+            "category": "Dendrobium"
+        },
+        {
+            "id": "4",
+            "name": "Hoa lan hồng",
+            "desc": "Hoa lan hồng mang vẻ đẹp ngọt ngào, lãng mạn và đầy nữ tính.",
+            "rating": 5,
+            "isSpecial": true,
+            "isNatural": false,
+            "image": "https://lillyflower.com.vn/wp-content/uploads/2023/11/lan-ho-diep-hong.jpeg",
+            "color": "pink",
+            "numberOfLike": 175,
+            "origin": "Taiwan",
+            "category": "Phalaenopsis"
+        },
+        {
+            "id": "5",
+            "name": "Hoa lan xanh",
+            "desc": "Một loài lan hiếm với màu xanh độc đáo, tượng trưng cho sự sáng tạo.",
+            "rating": 5,
+            "isSpecial": true,
+            "isNatural": false,
+            "image": "https://cdn.f20beauty.com/26078/hoa-lan-ho-diep-mau-xanh.jpg",
+            "color": "blue",
+            "numberOfLike": 100,
+            "origin": "Thailand",
+            "category": "Phalaenopsis"
+        },
+        {
+            "id": "6",
+            "name": "Lan hồ điệp",
+            "desc": "Lan hồ điệp nổi tiếng với vẻ đẹp quý phái và thời gian nở hoa lâu.",
+            "rating": 5,
+            "isSpecial": true,
+            "isNatural": true,
+            "image": "https://cdnv2.tgdd.vn/bhx-static/bhx/News/Images/2025/11/24/1586140/image14_202511240039110604.jpg",
+            "color": "pink",
+            "numberOfLike": 312,
+            "origin": "Taiwan",
+            "category": "Phalaenopsis"
+        },
+        {
+            "id": "7",
+            "name": "Lan dendro",
+            "desc": "Lan dendro có sức sống mạnh mẽ như những vũ công Samba và màu sắc đa dạng.",
+            "rating": 3,
+            "isSpecial": false,
+            "isNatural": true,
+            "image": "https://cdn.eva.vn/upload/3-2022/images/2022-07-22/image11-1658476169-15-width2048height1365.jpg",
+            "color": "purple",
+            "numberOfLike": 88,
+            "origin": "Vietnam",
+            "category": "Dendrobium"
+        },
+        {
+            "id": "8",
+            "name": "Lan vũ nữ",
+            "desc": "Những cánh hoa mềm mại như vũ công đang nhảy múa trong gió.",
+            "rating": 4,
+            "isSpecial": false,
+            "isNatural": true,
+            "image": "https://vuonlankhanhnguyen.com/wp-content/uploads/hoalanvunu-1.png",
+            "color": "yellow",
+            "numberOfLike": 143,
+            "origin": "Brazil",
+            "category": "Oncidium"
+        },
+        {
+            "id": "9",
+            "name": "Lan cattleya",
+            "desc": "Cattleya được mệnh danh là nữ hoàng của các loài hoa lan, là công chúa chúa công.",
+            "rating": 5,
+            "isSpecial": true,
+            "isNatural": true,
+            "image": "https://cdn.eva.vn/upload/3-2021/images/2021-09-06/image2-1630895145-52-width600height500.jpg",
+            "color": "pink",
+            "numberOfLike": 289,
+            "origin": "South America",
+            "category": "Cattleya"
+        },
+        {
+            "name": "Ronaldo",
+            "desc": "Argentina Treasure",
+            "rating": 0,
+            "isSpecial": true,
+            "isNatural": true,
+            "image": "https://static.messi.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-24-at-14.52.58.jpeg",
+            "color": "Blue",
+            "numberOfLike": 0,
+            "origin": "Argentina",
+            "category": "Argentina",
+            "id": "10"
+        }
+    ],
+    "users": [
+        {
+            "name": "Nhân Khắc",
+            "avatar": "https://lh3.googleusercontent.com/a/ACg8ocLETOZiqpruKJhWhaTqM-SXWRbSbKKL6EqZ66Dx1vM3bun3lHXg=s96-c",
+            "id": "1",
+            "role": "ADMIN"
+        }
+    ]
+}
