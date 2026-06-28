@@ -30,7 +30,7 @@ function ContactPage() {
     return (
         <>
             <Box sx={{ paddingRight: "12.5%", paddingLeft: "12.5%", textAlign: "left" }}>
-                <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 0 }}>
+                <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 0, color: "var(--text)" }}>
                     CONTACT
                 </Typography>
 
@@ -53,6 +53,26 @@ function ContactPage() {
                                 variant='outlined'
                                 error={error}
                                 helperText={error && "Not null"}
+                                sx={{
+                                    '& .MuiInputBase-root': {
+                                        color: 'var(--text)',
+                                    },
+                                    '& .MuiInputLabel-root': {
+                                        color: 'var(--text)',
+                                    },
+                                    // Đường viền
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: 'var(--border)',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: 'var(--accent)',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: 'var(--accent)',
+                                        },
+                                    },
+                                }}
                             />
 
                             <TextField
@@ -61,6 +81,25 @@ function ContactPage() {
                                 label="Phone number"
                                 error={error}
                                 helperText={error && "Not null"}
+                                sx={{
+                                    '& .MuiInputBase-root': {
+                                        color: 'var(--text)',
+                                    },
+                                    '& .MuiInputLabel-root': {
+                                        color: 'var(--text)',
+                                    },
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: 'var(--border)',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: 'var(--accent)',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: 'var(--accent)',
+                                        },
+                                    },
+                                }}
                             />
                         </Box>
 
@@ -70,6 +109,25 @@ function ContactPage() {
                             label="Email address"
                             error={error}
                             helperText={error && "Not null"}
+                            sx={{
+                                '& .MuiInputBase-root': {
+                                    color: 'var(--text)',
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: 'var(--text)',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: 'var(--border)',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: 'var(--accent)',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: 'var(--accent)',
+                                    },
+                                },
+                            }}
                         />
 
                         <TextField
@@ -78,6 +136,25 @@ function ContactPage() {
                             label="Your problem title"
                             error={error}
                             helperText={error && "Not null"}
+                            sx={{
+                                '& .MuiInputBase-root': {
+                                    color: 'var(--text)',
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: 'var(--text)',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: 'var(--border)',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: 'var(--accent)',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: 'var(--accent)',
+                                    },
+                                },
+                            }}
                         />
 
                         <TextField
@@ -88,14 +165,34 @@ function ContactPage() {
                             variant="outlined"
                             error={error}
                             helperText={error && "Not null"}
+                            sx={{
+                                '& .MuiInputBase-root': {
+                                    color: 'var(--text)',
+                                },
+                                '& .MuiInputLabel-root': {
+                                    color: 'var(--text)',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: 'var(--border)',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: 'var(--accent)',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: 'var(--accent)',
+                                    },
+                                },
+                            }}
                         />
 
                         <Button
                             variant='outlined'
                             color='inherit'
                             sx={{ width: "100%" }}
-                            startIcon={sending ? <CircularProgress size={20} color='inherit'/> : <SendIcon />}
+                            startIcon={sending ? <CircularProgress size={20} color='inherit' /> : <SendIcon />}
                             onClick={handleSending}
+
                         >
                             SEND
                         </Button>
@@ -111,7 +208,7 @@ function ContactPage() {
                             borderRadius: "10px"
                         }}>
                         <Box>
-                            <Typography variant='h6' sx={{ color: "black" }}>
+                            <Typography variant='h6'>
                                 Contact info
                             </Typography>
 
@@ -124,7 +221,7 @@ function ContactPage() {
                             <Box sx={{ display: "flex", alignItems: "center" }}>
                                 <LocationOnIcon sx={{ fontSize: "30px", marginRight: "10px" }} />
                                 <Box>
-                                    <Typography sx={{ fontSize: "12px", color: "black", fontWeight: "bold" }}>
+                                    <Typography sx={{ fontSize: "12px", fontWeight: "bold" }}>
                                         Address
                                     </Typography>
                                     <Typography sx={{ fontSize: "12px" }}>
@@ -138,7 +235,7 @@ function ContactPage() {
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                             <PhoneIcon sx={{ fontSize: "30px", marginRight: "10px" }} />
                             <Box>
-                                <Typography sx={{ fontSize: "12px", color: "black", fontWeight: "bold" }}>
+                                <Typography sx={{ fontSize: "12px", fontWeight: "bold" }}>
                                     Phone number
                                 </Typography>
                                 <Typography sx={{ fontSize: "12px" }}>
@@ -151,7 +248,7 @@ function ContactPage() {
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                             <EmailIcon sx={{ fontSize: "30px", marginRight: "10px" }} />
                             <Box>
-                                <Typography sx={{ fontSize: "12px", color: "black", fontWeight: "bold" }}>
+                                <Typography sx={{ fontSize: "12px", fontWeight: "bold" }}>
                                     Email
                                 </Typography>
                                 <Typography sx={{ fontSize: "12px" }}>
@@ -164,7 +261,7 @@ function ContactPage() {
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                             <AccessTimeIcon sx={{ fontSize: "30px", marginRight: "10px" }} />
                             <Box>
-                                <Typography sx={{ fontSize: "12px", color: "black", fontWeight: "bold" }}>
+                                <Typography sx={{ fontSize: "12px", fontWeight: "bold" }}>
                                     Working hours
                                 </Typography>
                                 <Typography sx={{ fontSize: "12px" }}>
@@ -180,12 +277,12 @@ function ContactPage() {
                             background: "#EEEDFE"
                         }}>
                             <Box sx={{ display: "flex", alignItems: "center", alignContent: "center" }}>
-                                <InfoOutlinedIcon sx={{ fontSize: "30px", marginRight: "10px" }} />
-                                <Box sx={{display: "flex", flexDirection: "column"}}>
+                                <InfoOutlinedIcon sx={{ fontSize: "30px", marginRight: "10px", color: "#6b6375" }} />
+                                <Box sx={{ display: "flex", flexDirection: "column" }}>
                                     <Typography sx={{ fontSize: "12px", color: "black", fontWeight: "bold" }}>
                                         Flash response
                                     </Typography>
-                                    <Typography sx={{ fontSize: "12px" }}>
+                                    <Typography sx={{ fontSize: "12px", color: "black" }}>
                                         We commit to response within 24h of work.
                                     </Typography>
                                 </Box>

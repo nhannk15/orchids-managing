@@ -90,7 +90,7 @@ function UpdateFlowerModal({ open, handleClose, orchid, setLoading, setSubmittin
             <Modal open={open} onClose={handleClose}>
                 <Card style={style}>
                     <CardHeader title={
-                        <Typography variant="h5" align="center">
+                        <Typography variant="h5" align="center" sx={{color: "black"}}>
                             {"Update Flower " + orchid.id}
                         </Typography>
                     }

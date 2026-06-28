@@ -11,6 +11,7 @@
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
     rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  --custom--text-color: black;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -34,7 +35,7 @@
 /* Attribute Selector */
 [data-theme="dark"] {
   --text: white;
-  --text-h: #f3f4f6;
+  --text-h: white;
   --bg: rgb(34, 34, 34);
   --border: #2e303a;
   --code-bg: #1f2028;
@@ -46,6 +47,8 @@
  rgba(0, 0, 0, 0.5) 0px 10px 30px,
   rgba(255, 255, 255, 0.03) 0px 1px 0px inset;
   --header-bg: #1a1a2e;
+
+  --custom--text-color: white;
 }
 
 [data-theme="dark"] #social .button-icon {
@@ -70,11 +73,10 @@ body {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading);
   font-weight: 500;
-  color: var(--text-h);
+  color: var(--custom--text-color);
 }
 
 h1 {
@@ -101,7 +103,7 @@ h2 {
 
 p {
   margin: 0;
-  color: var(--text-h);
+  color: var(--custom--text-color);
 }
 
 code,
@@ -109,7 +111,7 @@ code,
   font-family: var(--mono);
   display: inline-flex;
   border-radius: 4px;
-  color: var(--text-h);
+  color: var(--custom--text-color);
 }
 
 code {
