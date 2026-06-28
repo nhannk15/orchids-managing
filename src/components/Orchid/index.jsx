@@ -12,6 +12,17 @@ import { doGet, doPost } from "../../service/orchidService";
 import AddFlowerModal from "../AddFlowerModal";
 import UpdateFlowerModal from "../UpdateFlowerModal";
 
+const categories = [
+    "Phalaenopsis",
+    "Dendrobium",
+    "Oncidium",
+    "Cattleya",
+    "Vanda",
+    "Cymbidium",
+    "Paphiopedilum",
+    "Miltonia",
+]
+
 function Orchid() {
 
     const [loading, setLoading] = useState(true);
@@ -19,7 +30,7 @@ function Orchid() {
     const [open, setOpen] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [formError, setFormError] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -78,7 +89,7 @@ function Orchid() {
                 />
                 <FormControl>
                     <InputLabel id="demo-simple-select-label">
-                        Category
+                        All Categories
                     </InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -86,12 +97,16 @@ function Orchid() {
                         label="Category"
                         value={selectedCategory}
                         sx={{ width: "170px" }}
-                        onChange={(event) => { setSelectedCategory(event.target.value) }}
-                    >
-                        <MenuItem value={0}>All Categories</MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        onChange={(event) => {
+                            const value = event.target.value;
+                            setSelectedCategory(value);
+                            handleSearch(event.target.value)
+                        }}
+                    >   
+                        <MenuItem value={""}>All Categories</MenuItem>
+                        {categories.map((category) => (
+                            <MenuItem value={category} >{category}</MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
 
