@@ -81,8 +81,15 @@ function UpdateFlowerModal({ open, handleClose, orchid, setLoading, setSubmittin
 
     const handleSubmit = async (values, resetForm) => {
         setSubmitting(true);
-        await doPut(`/${orchid.id}`, values);
-        setLoading(true);
+        try {
+            await doPut(`/${orchid.id}`, values);
+            setLoading(true);
+            handleClose();
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setSubmitting(false);
+        }
     }
 
     return (
@@ -90,7 +97,7 @@ function UpdateFlowerModal({ open, handleClose, orchid, setLoading, setSubmittin
             <Modal open={open} onClose={handleClose}>
                 <Card style={style}>
                     <CardHeader title={
-                        <Typography variant="h5" align="center" sx={{color: "black"}}>
+                        <Typography variant="h5" align="center" sx={{ color: "black" }}>
                             {"Update Flower " + orchid.id}
                         </Typography>
                     }
@@ -235,7 +242,7 @@ function UpdateFlowerModal({ open, handleClose, orchid, setLoading, setSubmittin
                                     variant="contained"
                                     color="secondary"
                                     type="submit"
-                                    startIcon={submitting && <CircularProgress size={20} color="inherit"/>}
+                                    startIcon={submitting && <CircularProgress size={20} color="inherit" />}
                                 >
                                     {submitting ? "Updating" : "Update"}
                                 </Button>

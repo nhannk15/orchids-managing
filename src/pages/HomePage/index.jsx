@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import "../../components/Header"
 import "./style.css"
 import { GoogleLogin } from "@react-oauth/google";
@@ -9,6 +9,15 @@ import useUserStore from "../../store/useUserStore";
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import { useNavigate } from "react-router-dom";
+import SpaIcon from '@mui/icons-material/Spa';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import HeadphonesIcon from '@mui/icons-material/Headphones';
+
+const boxStyle = {
+    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
+    padding: "25px"
+}
+
 function HomePage() {
 
     const user = useUserStore((state) => state.user);
@@ -25,6 +34,34 @@ function HomePage() {
                     </Grid>
                 </Grid>
             </div>
+            <Box sx={{paddingLeft: "12.5%", paddingRight: "12.5%", marginTop: "20px", textAlign: "center"}}>
+                <Grid container spacing={2}>
+                    <Grid size={{xs: 12, md: 4}}>
+                        <Box sx={boxStyle}>
+                            <Box>
+                                <SpaIcon />
+                            </Box>
+                            <Box>
+                                <Typography>
+                                    
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </Grid>
+
+                    <Grid size={{xs: 12, md: 4}}>
+                        <Box>
+                            AAA
+                        </Box>
+                    </Grid>
+
+                    <Grid size={{xs: 12, md: 4}}>
+                        <Box>
+                            AAAA
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Box>
         </>
     )
 }
