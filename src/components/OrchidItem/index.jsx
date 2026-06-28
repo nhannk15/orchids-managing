@@ -6,51 +6,26 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { doDelete } from "../../service/orchidService";
+import UpdateFlowerModal from "../UpdateFlowerModal";
+import useUserStore from '../../store/useUserStore';
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    borderRadius: "16px",
-    boxShadow: 24,
-    padding: "40px"
-};
 
-function OrchidItem({ orchid, setOrchid, setLoading }) {
+function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
+
+    const user = useUserStore((state) => state.user);
 
     const [view, setView] = useState(true);
     const [numberOfLikes, setNumberOfLikes] = useState(orchid.numberOfLike);
     const [isLiked, setIsLiked] = useState(false);
     const [newFlower, setNewFlower] = useState(orchid);
-    const [open, setOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
     const deleteData = async () => {
-        const response = await fetch(`https://6a169f001b90031f81b140d7.mockapi.io/orchids/${orchid.id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        const data = await response.json();
-        console.log(data);
-        handleClose();
-        setLoading(true);
-    }
-
-    const patchData = async () => {
-        const response = await fetch(`https://6a169f001b90031f81b140d7.mockapi.io/orchids/${orchid.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newFlower)
-        });
-        const data = await response.json();
-        console.log(data);
+        await doDelete(`/${orchid.id}`);
         handleClose();
         setLoading(true);
     }
@@ -64,108 +39,22 @@ function OrchidItem({ orchid, setOrchid, setLoading }) {
         setIsLiked(!isLiked);
     }
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleNameChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            name: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleDescChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            desc: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleImageChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            image: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleColorChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            color: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleOriginChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            origin: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleCategoryChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            category: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleRatingChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            rating: parseInt(event.target.value)
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleLikesChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            numberOfLike: parseInt(event.target.value)
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleSpecialChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            isSpecial: event.target.checked
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleNaturalChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            isNatural: event.target.checked
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const [openMenu, setOpenMenu] = useState(false);
-
     const handleMenuOpen = (event) => {
-        setOpenMenu(true);
+        setMenuOpen(true);
         setAnchorEl(event.currentTarget);
-    };
+    }
 
     const handleMenuClose = () => {
-        setOpenMenu(false);
-        setAnchorEl(null);
-    };
-    
-    const handleUpdateOrchid = () => {
-        handleMenuClose();
-        setOpen(true);
+        setMenuOpen(false);
+        setAnchorEl(false);
+    }
+
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    }
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
     }
 
     return (
@@ -174,20 +63,22 @@ function OrchidItem({ orchid, setOrchid, setLoading }) {
                 <Card>
                     <CardHeader
                         sx={{ textAlign: "left" }}
-                        avatar={<Avatar>N</Avatar>}
-                        action={<IconButton onClick={handleMenuOpen}><MoreVertIcon /></IconButton>}
+                        avatar={<Avatar src="https://yt3.googleusercontent.com/ytc/AIdro_lphR7IgKMrsh-RwEVXL2XEvnQ8rb9Qb-a04v-yZJtM_ZQ=s160-c-k-c0x00ffffff-no-rj"></Avatar>}
+                        action={(user != null && user.role == "ADMIN") && (<IconButton onClick={handleMenuOpen}><MoreVertIcon /></IconButton>)}
                         title={orchid.name}
                         subheader={"Origin: " + orchid.origin}
                     />
+                    {(user != null && user.role == "ADMIN") && (
+                        <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleMenuClose}>
+                            <MenuItem onClick={deleteData}>
+                                Delete
+                            </MenuItem>
+                            <MenuItem onClick={handleOpenModal}>
+                                Update
+                            </MenuItem>
+                        </Menu>
+                    )}
 
-                    <Menu anchorEl={anchorEl} open={openMenu} onClose={handleMenuClose}>
-                        <MenuItem onClick={deleteData}>
-                            Delete
-                        </MenuItem>
-                        <MenuItem onClick={handleUpdateOrchid}>
-                            Update
-                        </MenuItem>
-                    </Menu>
 
                     <CardMedia
                         component={"img"}
@@ -242,106 +133,14 @@ function OrchidItem({ orchid, setOrchid, setLoading }) {
                 </Card>
             </Grid>
 
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="parent-modal-title"
-                aria-describedby="parent-modal-description"
-            >
-                <Box component={"form"} sx={{ ...style, width: 400, display: "flex", justifyContent: "center", flexDirection: "column", textAlign: "center" }}>
-                    <h2>Add a new flower</h2>
-                    <TextField
-                        defaultValue={orchid.name}
-                        size="small"
-                        label="Flower's name"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleNameChange(event) }} />
-
-                    <TextField
-                        defaultValue={orchid.desc}
-                        size="small"
-                        label="Description"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleDescChange(event) }} />
-
-                    <TextField
-                        defaultValue={orchid.image}
-                        size="small"
-                        label="Image url"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleImageChange(event) }} />
-
-                    <TextField
-                        defaultValue={orchid.color}
-                        size="small"
-                        label="Color"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleColorChange(event) }} />
-
-                    <TextField
-                        defaultValue={orchid.origin}
-                        size="small"
-                        label="Origin"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleOriginChange(event) }} />
-
-                    <TextField
-                        defaultValue={orchid.category}
-                        size="small"
-                        label="Category"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleCategoryChange(event) }} />
-
-                    <Stack direction={"row"} spacing={10} sx={{ marginTop: "10px", marginBottom: "10px" }}>
-                        <Typography color="textSecondary">
-                            Rating:
-                        </Typography>
-                        <Rating
-                            name="half-rating"
-                            defaultValue={orchid.rating}
-                            precision={0.5}
-                            onChange={(event) => {
-                                handleRatingChange(event);
-                            }}
-                        />
-                    </Stack>
-
-                    <TextField
-                        defaultValue={orchid.numberOfLike}
-                        label="Number of likes"
-                        type="number"
-                        size="small"
-                        variant="outlined"
-                        onChange={(event) => handleLikesChange(event)}
-                    />
-
-                    <Stack sx={{ textAlign: "left", display: "flex", alignItems: "center" }} direction={"row"}>
-                        <Typography color="textSecondary">Special: </Typography>
-                        <Checkbox
-                            checked={orchid.isSpecial}
-                            label="Check"
-                            onChange={(event) => { handleSpecialChange(event) }} />
-                    </Stack>
-
-                    <Stack sx={{ textAlign: "left", display: "flex", alignItems: "center" }} direction={"row"}>
-                        <Typography color="textSecondary">Natural: </Typography>
-                        <Checkbox
-                            checked={orchid.isNatural}
-                            label="Check"
-                            onChange={(event) => { handleNaturalChange(event) }} />
-                    </Stack>
-
-                    <div style={{ textAlign: "center", marginTop: "30px" }}>
-                        <Button variant="contained" color="secondary" onClick={patchData}>Update flower</Button>
-                    </div>
-                </Box>
-            </Modal>
+            <UpdateFlowerModal
+                open={openModal}
+                handleClose={handleCloseModal}
+                setLoading={setLoading}
+                submitting={submitting}
+                setSubmitting={setSubmitting}
+                orchid={orchid}
+            />
         </>
     )
 }

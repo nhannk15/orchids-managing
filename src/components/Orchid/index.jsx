@@ -1,148 +1,102 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import OrchidItem from "../OrchidItem";
 import "./style.css"
-import { Box, Button, Checkbox, Fab, Grid, Modal, Rating, Skeleton, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Checkbox, CircularProgress, Fab, FormControl, Grid, InputLabel, MenuItem, Modal, Rating, Select, Skeleton, Stack, TextField, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { NumberField as BaseNumberField } from '@base-ui/react/number-field';
 import { CheckBox } from "@mui/icons-material";
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    borderRadius: "16px",
-    boxShadow: 24,
-    padding: "40px"
-};
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { debounce } from "lodash";
+import { doGet, doPost } from "../../service/orchidService";
+import AddFlowerModal from "../AddFlowerModal";
+import UpdateFlowerModal from "../UpdateFlowerModal";
 
 function Orchid() {
 
-    const [newFlower, setNewFlower] = useState({});
     const [loading, setLoading] = useState(true);
-    const [orchid, setOrchid] = useState(null);
     const [listOfOrchids, setListOfOrchids] = useState([]);
     const [open, setOpen] = useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleNameChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            name: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleDescChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            desc: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleImageChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            image: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleColorChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            color: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleOriginChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            origin: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleCategoryChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            category: event.target.value
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleRatingChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            rating: parseInt(event.target.value)
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleLikesChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            numberOfLike: parseInt(event.target.value)
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleSpecialChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            isSpecial: event.target.checked
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const handleNaturalChange = (event) => {
-        const comingFlower = {
-            ...newFlower,
-            isNatural: event.target.checked
-        }
-        setNewFlower(comingFlower);
-    }
-
-    const postData = async () => {
-        const response = await fetch("https://6a169f001b90031f81b140d7.mockapi.io/orchids", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newFlower)
-        });
-        const data = await response.json();
-        console.log(data);
-        handleClose();
-        setLoading(true);
-    }
-
-    console.log(newFlower);
+    const [submitting, setSubmitting] = useState(false);
+    const [formError, setFormError] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch("https://6a169f001b90031f81b140d7.mockapi.io/orchids");
-            const data = await response.json();
-            setListOfOrchids(data);
-            setLoading(false);
+            try {
+                const responseData = await doGet("");
+                setListOfOrchids(responseData);
+            } catch (error) {
+                console.log("Error occur " + error);
+            } finally {
+                setLoading(false);
+            }
         }
         setTimeout(() => {
             fetchData();
-        }, 1000);
+        }, 300);
     }, [loading]);
+
+    const handleOpen = () => {
+        setOpen(true);
+        setFormError(null);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+        setFormError(null);
+    }
+
+    const handleSearch = useCallback(
+        debounce(async (value) => {
+            try {
+                const responseData = await doGet("?search=" + value);
+                setListOfOrchids(responseData);
+            } catch (error) {
+                console.log("Error occured: " + error);
+                setListOfOrchids([]);
+            }
+        }, 500), []
+    );
 
     return (
         <>
+            <Box sx={{ paddingRight: "12.5%", paddingLeft: "12.5%", textAlign: "left" }}>
+                <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 0 }}>
+                    Collections
+                </Typography>
+                <Typography variant="h3" sx={{ marginTop: 0, marginBottom: 2 }}>
+                    Discovering the beauty of orchids
+                </Typography>
+
+                <TextField
+                    id="outlined-basic"
+                    label="Search by orchid's name"
+                    variant="outlined" sx={{ width: "50%" }}
+                    size="small"
+                    onChange={(event) => handleSearch(event.target.value)}
+                />
+                <FormControl>
+                    <InputLabel id="demo-simple-select-label">
+                        Category
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        size="small"
+                        label="Category"
+                        value={selectedCategory}
+                        sx={{ width: "170px" }}
+                        onChange={(event) => { setSelectedCategory(event.target.value) }}
+                    >
+                        <MenuItem value={0}>All Categories</MenuItem>
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                </FormControl>
+
+            </Box>
+
             <Grid container className="container" spacing={2} sx={{ marginTop: "30px" }} >
                 {loading ?
                     Array.from(new Array(6)).map((item, index) => (
@@ -152,113 +106,38 @@ function Orchid() {
                             <Skeleton width="60%" />
                             <Skeleton width="40%" />
                         </Grid>
-                    )) : listOfOrchids.map((orchid) => (
-                        <OrchidItem
-                            key={orchid.id}
-                            orchid={orchid}
-                            setOrchid={setOrchid} 
-                            setLoading={setLoading}
-                        />
-                    ))
+                    )) : (
+                        (listOfOrchids.length == 0) ? (
+                            <>
+                                Your keyword doesn't match any orchids' name...
+                            </>
+                        ) : (
+                            listOfOrchids.map((orchid) => (
+                                <OrchidItem
+                                    key={orchid.id}
+                                    orchid={orchid}
+                                    setLoading={setLoading}
+                                />)
+
+                            )))
                 }
             </Grid>
 
-            <Fab color="primary"
-                aria-label="add"
+            <Fab aria-label="add"
                 sx={{ position: "sticky", bottom: "5%", left: "95%" }}
                 onClick={handleOpen}
                 color="secondary"
             >
                 <AddIcon />
             </Fab>
-
-            <Modal
+            <AddFlowerModal
                 open={open}
-                onClose={handleClose}
-                aria-labelledby="parent-modal-title"
-                aria-describedby="parent-modal-description"
-            >
-                <Box component={"form"} sx={{ ...style, width: 400, display: "flex", justifyContent: "center", flexDirection: "column", textAlign: "center" }}>
-                    <h2>Add a new flower</h2>
-                    <TextField
-                        size="small"
-                        label="Flower's name"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleNameChange(event) }} />
+                handleClose={() => setOpen(false)}
+                setLoading={setLoading}
+                submitting={submitting}
+                setSubmitting={setSubmitting} />
 
-                    <TextField
-                        size="small"
-                        label="Description"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleDescChange(event) }} />
 
-                    <TextField
-                        size="small"
-                        label="Image url"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleImageChange(event) }} />
-
-                    <TextField
-                        size="small"
-                        label="Color"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleColorChange(event) }} />
-
-                    <TextField
-                        size="small"
-                        label="Origin"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleOriginChange(event) }} />
-
-                    <TextField
-                        size="small"
-                        label="Category"
-                        variant="standard"
-                        fullWidth
-                        onChange={(event) => { handleCategoryChange(event) }} />
-
-                    <Stack direction={"row"} spacing={10} sx={{ marginTop: "10px", marginBottom: "10px" }}>
-                        <Typography color="textSecondary">
-                            Rating:
-                        </Typography>
-                        <Rating
-                            name="half-rating"
-                            defaultValue={0}
-                            precision={0.5}
-                            onChange={(event) => {
-                                handleRatingChange(event);
-                            }}
-                        />
-                    </Stack>
-
-                    <TextField
-                        label="Number of likes"
-                        type="number"
-                        size="small"
-                        variant="outlined"
-                        onChange={(event) => handleLikesChange(event)}
-                    />
-
-                    <Stack sx={{ textAlign: "left", display: "flex", alignItems: "center" }} direction={"row"}>
-                        <Typography color="textSecondary">Special: </Typography>
-                        <Checkbox label="Check" onChange={(event) => { handleSpecialChange(event) }} />
-                    </Stack>
-
-                    <Stack sx={{ textAlign: "left", display: "flex", alignItems: "center" }} direction={"row"}>
-                        <Typography color="textSecondary">Natural: </Typography>
-                        <Checkbox label="Check" onChange={(event) => {handleNaturalChange(event)}}/>
-                    </Stack>
-
-                    <div style={{ textAlign: "center", marginTop: "30px" }}>
-                        <Button variant="contained" color="secondary" onClick={postData}>Add flower</Button>
-                    </div>
-                </Box>
-            </Modal>
         </>
     )
 }
