@@ -11,6 +11,7 @@ import { debounce } from "lodash";
 import { doGet, doPost } from "../../service/orchidService";
 import AddFlowerModal from "../AddFlowerModal";
 import UpdateFlowerModal from "../UpdateFlowerModal";
+import { doGetCategory } from "../../service/categoryService";
 
 function Orchid() {
 
@@ -19,13 +20,19 @@ function Orchid() {
     const [open, setOpen] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [formError, setFormError] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState(0);
+    const [categories, setCategories] = useState([]);
+
+    const [searchName, setSearchName] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("All");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const responseData = await doGet("");
                 setListOfOrchids(responseData);
+
+                const categoriesResponse = await doGetCategory("");
+                setCategories(categoriesResponse);
             } catch (error) {
                 console.log("Error occur " + error);
             } finally {
@@ -47,17 +54,36 @@ function Orchid() {
         setFormError(null);
     }
 
-    const handleSearch = useCallback(
-        debounce(async (value) => {
+    const fetchOrchids = useCallback(
+        debounce(async (name, category) => {
             try {
-                const responseData = await doGet("?search=" + value);
+                let query = "";
+                if (category == "All") {
+                    query = `?name:contains=${name}`;
+                } else {
+                    query = `?name:contains=${name}&category:contains=${category}`;
+                }
+                console.log(query);
+                const responseData = await doGet(query);
                 setListOfOrchids(responseData);
             } catch (error) {
                 console.log("Error occured: " + error);
                 setListOfOrchids([]);
             }
         }, 500), []
-    );
+    )
+
+    const handleSearch = (event) => {
+        const value = event.target.value;
+        setSearchName(value);
+        fetchOrchids(value, selectedCategory);
+    }
+
+    const handleCategorySelect = (event) => {
+        const value = event.target.value;
+        setSelectedCategory(value);
+        fetchOrchids(searchName, value);
+    }
 
     return (
         <>
@@ -74,7 +100,7 @@ function Orchid() {
                     label="Search by orchid's name"
                     variant="outlined" sx={{ width: "50%" }}
                     size="small"
-                    onChange={(event) => handleSearch(event.target.value)}
+                    onChange={handleSearch}
                 />
                 <FormControl>
                     <InputLabel id="demo-simple-select-label">
@@ -86,12 +112,12 @@ function Orchid() {
                         label="Category"
                         value={selectedCategory}
                         sx={{ width: "170px" }}
-                        onChange={(event) => { setSelectedCategory(event.target.value) }}
+                        onChange={handleCategorySelect}
                     >
-                        <MenuItem value={0}>All Categories</MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value={"All"}>All</MenuItem>
+                        {categories.map((category, index) => (
+                            <MenuItem value={category.name}>{category.name}</MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
 
