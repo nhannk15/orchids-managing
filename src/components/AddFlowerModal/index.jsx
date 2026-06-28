@@ -93,7 +93,7 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
             <Card sx={cardStyle}>
                 <CardHeader
                     title={
-                        <Typography variant="h4">
+                        <Typography variant="h4" sx={{color: "black"}}>
                             Add a new Orchid
                         </Typography>
                     }

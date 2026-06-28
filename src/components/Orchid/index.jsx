@@ -83,9 +83,29 @@ function Orchid() {
                 <TextField
                     id="outlined-basic"
                     label="Search by orchid's name"
-                    variant="outlined" sx={{ width: "50%" }}
+                    variant="outlined"
                     size="small"
                     onChange={(event) => handleSearch(event.target.value)}
+                    sx={{
+                        width: "50%",
+                        '& .MuiInputBase-root': {
+                            color: 'var(--text)',
+                        },
+                        '& .MuiInputLabel-root': {
+                            color: 'var(--text)',
+                        },
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': {
+                                borderColor: 'var(--border)',
+                            },
+                            '&:hover fieldset': {
+                                borderColor: 'var(--accent)',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: 'var(--accent)',
+                            },
+                        },
+                    }}
                 />
                 <FormControl>
                     <InputLabel id="demo-simple-select-label">
@@ -96,13 +116,61 @@ function Orchid() {
                         size="small"
                         label="Category"
                         value={selectedCategory}
-                        sx={{ width: "170px" }}
+                        sx={{
+                            width: "170px",
+                            color: 'var(--text)', // Màu chữ của select
+                            '& .MuiOutlinedInput-root': {
+                                color: 'var(--text)',
+                                '& fieldset': {
+                                    borderColor: 'var(--border)',
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'var(--accent)',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: 'var(--accent)',
+                                },
+                            },
+                            '& .MuiSelect-select': {
+                                color: 'var(--text)',
+                            },
+                            '& .MuiSvgIcon-root': {
+                                color: 'var(--text)', // Màu icon dropdown
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: 'var(--text)',
+                            },
+                            '& .MuiInputLabel-root.Mui-focused': {
+                                color: 'var(--accent)',
+                            },
+                        }}
                         onChange={(event) => {
                             const value = event.target.value;
                             setSelectedCategory(value);
                             handleSearch(event.target.value)
                         }}
-                    >   
+                        MenuProps={{
+                            sx: {
+                                '& .MuiPaper-root': {
+                                    backgroundColor: 'var(--bg)',
+                                    color: 'var(--text)',
+                                },
+                                '& .MuiMenuItem-root': {
+                                    color: 'var(--text)',
+                                    backgroundColor: 'var(--bg)',
+                                    '&:hover': {
+                                        backgroundColor: 'var(--code-bg)',
+                                    },
+                                    '&.Mui-selected': {
+                                        backgroundColor: 'var(--accent-bg)',
+                                        '&:hover': {
+                                            backgroundColor: 'var(--accent-bg)',
+                                        }
+                                    }
+                                }
+                            }
+                        }}
+                    >
                         <MenuItem value={""}>All Categories</MenuItem>
                         {categories.map((category) => (
                             <MenuItem value={category} >{category}</MenuItem>

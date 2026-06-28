@@ -26,7 +26,7 @@ function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
 
     const deleteData = async () => {
         await doDelete(`/${orchid.id}`);
-        handleClose();
+        handleMenuClose();
         setLoading(true);
     }
 
