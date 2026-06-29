@@ -1,4 +1,5 @@
 import LayoutDefault from "../components/LayoutDefault";
+import NaturalOrchid from "../components/NaturalOrchid";
 import OrchidDetail from "../components/OrchidDetail";
 import SpecialOrchid from "../components/SpecialOrchid";
 import AboutPage from "../pages/AboutPage";
@@ -39,6 +40,10 @@ export const allRoutes = [
             {
                 path: "/orchid/special",
                 element: <SpecialOrchid />,
+            },
+            {
+                path: "/orchid/natural",
+                element: <NaturalOrchid />,
             }
         ]
     },

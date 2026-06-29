@@ -11,6 +11,7 @@ import { debounce } from "lodash";
 import { doGet, doPost } from "../../service/orchidService";
 import AddFlowerModal from "../AddFlowerModal";
 import UpdateFlowerModal from "../UpdateFlowerModal";
+import useUserStore from "../../store/useUserStore";
 
 const categories = [
     "Phalaenopsis",
@@ -32,10 +33,16 @@ function Orchid() {
     const [formError, setFormError] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState("");
 
+    const user = useUserStore((state) => state.user);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const responseData = await doGet("");
+                responseData.sort((a, b) => {
+                    return Number(b.id) - Number(a.id);
+                });
+                console.log(responseData);
                 setListOfOrchids(responseData);
             } catch (error) {
                 console.log("Error occur " + error);
@@ -62,6 +69,9 @@ function Orchid() {
         debounce(async (value) => {
             try {
                 const responseData = await doGet("?search=" + value);
+                responseData.sort((a, b) => {
+                    return Number(b.id) - Number(a.id);
+                });
                 setListOfOrchids(responseData);
             } catch (error) {
                 console.log("Error occured: " + error);
@@ -205,14 +215,16 @@ function Orchid() {
                             )))
                 }
             </Grid>
-
-            <Fab aria-label="add"
+            {(user != null && user.role == "ADMIN") && (
+                <Fab aria-label="add"
                 sx={{ position: "sticky", bottom: "5%", left: "95%" }}
                 onClick={handleOpen}
                 color="secondary"
             >
                 <AddIcon />
             </Fab>
+            )}
+            
             <AddFlowerModal
                 open={open}
                 handleClose={() => setOpen(false)}
