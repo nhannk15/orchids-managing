@@ -44,6 +44,9 @@ const validationSchema = Yup.object({
         .required("numberOfLike can't be left empty")
         .default(0)
         .min(0, "Min numberOfLike is 0"),
+    clipUrl: Yup.string()
+        .required("clipUrl is required")
+        .url("Url clip must be valid"),
     isSpecial: Yup.boolean()
         .default(false),
     isNatural: Yup.boolean()
@@ -62,6 +65,7 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
             category: "",
             rating: 0,
             numberOfLike: 0,
+            clipUrl: "",
             isSpecial: false,
             isNatural: false
         },
@@ -93,7 +97,7 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
             <Card sx={cardStyle}>
                 <CardHeader
                     title={
-                        <Typography variant="h4">
+                        <Typography variant="h4" sx={{ color: "black" }}>
                             Add a new Orchid
                         </Typography>
                     }
@@ -177,6 +181,10 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
                                     <Rating
                                         fullWidth
                                         label="a"
+                                        name="rating"
+                                        value={formik.values.rating}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
                                     />
                                 </Box>
 
@@ -192,6 +200,17 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
                                     error={formik.touched.numberOfLike && Boolean(formik.errors.numberOfLike)}
                                     helperText={formik.errors.numberOfLike}
                                 />
+
+                                <TextField
+                                    fullWidth
+                                    variant="standard"
+                                    label="Url clip"
+                                    name="clipUrl"
+                                    value={formik.values.clipUrl}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    error={formik.touched.clipUrl && Boolean(formik.errors.clipUrl)}
+                                    helperText={formik.errors.clipUrl} />
 
                                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "40px", marginTop: "20px" }}>
                                     <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -215,7 +234,7 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur} />
                                     </Box>
-                                    
+
                                 </Box>
                             </Box>
                         </Box>

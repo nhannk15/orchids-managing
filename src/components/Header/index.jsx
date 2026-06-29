@@ -155,47 +155,61 @@ function Header() {
                             </Button>
                         </Link>
 
+                        <Link style={{ textDecoration: "none" }} to={"/about"}>
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                ABOUT
+                            </Button>
+                        </Link>
+
                     </Box>
                     {user == null ? (
                         <Login />
                     ) : (
                         <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src={user == null ? "/static/images/avatar/2.jpg" : user.avatar} />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt="Remy Sharp" src={user == null ? "/static/images/avatar/2.jpg" : user.avatar} />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{
+                                    mt: '45px',
+                                    '& .MuiPaper-root': {
+                                        backgroundColor: 'var(--bg)', // Nền menu
+                                    }
+                                }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
 
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography onClick={toggleTheme} sx={{ textAlign: 'center' }}>
-                                    Change Theme
-                                </Typography>
-                            </MenuItem>
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Typography onClick={toggleTheme} sx={{ textAlign: 'center' }}>
+                                        Change Theme
+                                    </Typography>
+                                </MenuItem>
 
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography onClick={doLogout} sx={{ textAlign: 'center' }}>
-                                    Logout
-                                </Typography>
-                            </MenuItem>
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Typography onClick={doLogout} sx={{ textAlign: 'center' }}>
+                                        Logout
+                                    </Typography>
+                                </MenuItem>
 
-                        </Menu>
-                    </Box>
+                            </Menu>
+                        </Box>
                     )}
                 </Toolbar>
             </Container>

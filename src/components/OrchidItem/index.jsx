@@ -1,11 +1,15 @@
 import { useState } from "react";
 import "./style.css"
 import { Link } from "react-router-dom";
-import { Avatar, Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox, Grid, IconButton, Menu, MenuItem, Modal, Rating, Skeleton, Stack, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox, Grid, IconButton, Menu, MenuItem, Modal, Rating, Skeleton, Stack, TextField, Tooltip, Typography } from "@mui/material";
+
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import CompostIcon from '@mui/icons-material/Compost';
+import HotelClassIcon from '@mui/icons-material/HotelClass';
+
 import { doDelete } from "../../service/orchidService";
 import UpdateFlowerModal from "../UpdateFlowerModal";
 import useUserStore from '../../store/useUserStore';
@@ -26,7 +30,7 @@ function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
 
     const deleteData = async () => {
         await doDelete(`/${orchid.id}`);
-        handleClose();
+        handleMenuClose();
         setLoading(true);
     }
 
@@ -120,15 +124,51 @@ function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
 
                         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <Link to={"/orchid/" + orchid.id}>
-                                <IconButton>
-                                    <InfoOutlinedIcon />
-                                </IconButton>
+                                <Tooltip title="View detail">
+                                    <IconButton>
+                                        <InfoOutlinedIcon />
+                                    </IconButton>
+                                </Tooltip>
+
                             </Link>
 
                             <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
                                 Info
                             </Typography>
                         </Box>
+
+                        {Boolean(orchid.isSpecial) && (
+                            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                <Tooltip title="View special orchids">
+                                    <Link to={"/orchid/special"}>
+                                        <IconButton>
+                                            <HotelClassIcon />
+                                        </IconButton>
+                                    </Link>
+                                </Tooltip>
+
+
+                                <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
+                                    Special
+                                </Typography>
+                            </Box>
+                        )}
+
+                        {Boolean(orchid.isNatural) && (
+                            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                <Tooltip title="View natural orchids">
+                                    <Link to={"/orchid/natural"}>
+                                        <IconButton>
+                                            <CompostIcon />
+                                        </IconButton>
+                                    </Link>
+                                </Tooltip>
+
+                                <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
+                                    Natural
+                                </Typography>
+                            </Box>
+                        )}
                     </CardActions>
                 </Card>
             </Grid>
