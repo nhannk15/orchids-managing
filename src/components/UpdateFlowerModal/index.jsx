@@ -49,6 +49,9 @@ const validationSchema = Yup.object({
         .min(0, "Min is 0")
         .max(100, "Max is 100")
         .default(0),
+    clipUrl: Yup.string()
+        .required("URL Clip is required")
+        .url("URL Clip must be valid"),
     isSpecial: Yup.boolean()
         .default(false),
     isNatural: Yup.boolean()
@@ -68,6 +71,7 @@ function UpdateFlowerModal({ open, handleClose, orchid, setLoading, setSubmittin
             category: orchid.category,
             rating: orchid.rating,
             numberOfLike: orchid.numberOfLike,
+            clipUrl: orchid.clipUrl,
             isSpecial: orchid.isSpecial,
             isNatural: orchid.isNatural
         },
@@ -189,10 +193,17 @@ function UpdateFlowerModal({ open, handleClose, orchid, setLoading, setSubmittin
                                     />
 
                                     <Box sx={{ display: "flex", gap: "20px", marginTop: "8px", marginBottom: "8px" }}>
-                                        <Typography variant="subtitle1" color="textSecondary">
+                                        <Typography
+                                            variant="subtitle1"
+                                            color="textSecondary"
+                                        >
                                             Rating
                                         </Typography>
-                                        <Rating />
+                                        <Rating
+                                            name="rating"
+                                            value={formik.values.rating}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur} />
                                     </Box>
 
                                     <TextField
@@ -208,6 +219,17 @@ function UpdateFlowerModal({ open, handleClose, orchid, setLoading, setSubmittin
                                         error={formik.touched.numberOfLike && Boolean(formik.errors.numberOfLike)}
                                         helperText={formik.errors.numberOfLike}
                                     />
+
+                                    <TextField
+                                        fullWidth
+                                        variant="standard"
+                                        label="Url clip"
+                                        name="clipUrl"
+                                        value={formik.values.clipUrl}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        error={formik.touched.clipUrl && Boolean(formik.errors.clipUrl)}
+                                        helperText={formik.errors.clipUrl} />
 
                                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "40px", marginTop: "20px" }}>
                                         <Box sx={{ display: "flex", alignItems: "center" }}>

@@ -155,6 +155,15 @@ function Header() {
                             </Button>
                         </Link>
 
+                        <Link style={{ textDecoration: "none" }} to={"/about"}>
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                ABOUT
+                            </Button>
+                        </Link>
+
                     </Box>
                     {user == null ? (
                         <Login />

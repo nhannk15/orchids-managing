@@ -8,14 +8,19 @@ import Login from "../../components/Login";
 import useUserStore from "../../store/useUserStore";
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SpaIcon from '@mui/icons-material/Spa';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 
 const boxStyle = {
     boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px",
-    padding: "25px"
+    paddingLeft: "100px",
+    paddingRight: "100px",
+    paddingTop: "30px",
+    paddingBottom: "30px",
+    textAlign: "left",
+    borderRadius: "16px"
 }
 
 function HomePage() {
@@ -28,38 +33,94 @@ function HomePage() {
             <div className="section--one">
                 <Grid container className="section--one__content">
                     <Grid size={{ xs: 10, sm: 10, md: 8, lg: 8, xl: 8, }}>
-                        <h5 className="section--one__smalltitle" style={{color: "black"}}>WITH OUR MOST SINCERE</h5>
-                        <h1 style={{color: "black"}}>UPGRADE YOUR GARDEN</h1>
-                        <p style={{color: "black"}}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab fugit reiciendis itaque! Error excepturi laboriosam hic, ipsum, provident aperiam, deleniti officia saepe enim sed cumque quasi a ducimus dolorem incidunt.</p>
+                        <h5 className="section--one__smalltitle" style={{ color: "black" }}>WITH OUR MOST SINCERE</h5>
+                        <h1 style={{ color: "black" }}>UPGRADE YOUR GARDEN</h1>
+                        <p style={{ color: "black" }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab fugit reiciendis itaque! Error excepturi laboriosam hic, ipsum, provident aperiam, deleniti officia saepe enim sed cumque quasi a ducimus dolorem incidunt.</p>
                     </Grid>
                 </Grid>
             </div>
-            <Box sx={{paddingLeft: "12.5%", paddingRight: "12.5%", marginTop: "20px", textAlign: "center"}}>
+            <Box sx={{ paddingLeft: "12.5%", paddingRight: "12.5%", marginTop: "20px", textAlign: "center" }}>
                 <Grid container spacing={2}>
-                    <Grid size={{xs: 12, md: 4}}>
+                    <Grid size={{ xs: 12, md: 4 }}>
                         <Box sx={boxStyle}>
                             <Box>
-                                <SpaIcon />
+                                <SpaIcon color="success" />
                             </Box>
+
                             <Box>
-                                <Typography>
-                                    
+                                <Typography color="success">
+                                    100% Nature
+                                </Typography>
+
+                                <Typography color="warning">
+                                    No extraordinary chemicals
                                 </Typography>
                             </Box>
                         </Box>
                     </Grid>
 
-                    <Grid size={{xs: 12, md: 4}}>
-                        <Box>
-                            AAA
+                    <Grid size={{ xs: 12, md: 4 }}>
+                        <Box sx={boxStyle}>
+                            <Box>
+                                <SpaIcon color="success" />
+                            </Box>
+
+                            <Box>
+                                <Typography color="success">
+                                    100% Nature
+                                </Typography>
+
+                                <Typography color="warning">
+                                    No extraordinary chemicals
+                                </Typography>
+                            </Box>
                         </Box>
                     </Grid>
 
-                    <Grid size={{xs: 12, md: 4}}>
-                        <Box>
-                            AAAA
+                    <Grid size={{ xs: 12, md: 4 }}>
+                        <Box sx={boxStyle}>
+                            <Box>
+                                <SpaIcon color="success" />
+                            </Box>
+
+                            <Box>
+                                <Typography color="success">
+                                    100% Nature
+                                </Typography>
+
+                                <Typography color="warning">
+                                    No extraordinary chemicals
+                                </Typography>
+                            </Box>
                         </Box>
                     </Grid>
+
+                    <Grid size={{ xs: 12 }}>
+                        <Box sx={boxStyle}>
+                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                                <Box>
+                                    <Typography variant="h3">
+                                        Ready to explore our orchids?
+                                    </Typography>
+
+                                    <Typography variant="body1">
+                                        More than 2 users love this collection.
+                                    </Typography>
+                                </Box>
+
+                                <Box>
+                                    <Link to={"/orchid"}>
+                                        <Button variant="outlined" size="large" color="secondary">
+                                            Explore now
+                                        </Button>
+                                    </Link>
+
+                                </Box>
+
+                            </Box>
+                        </Box>
+                    </Grid>
+
                 </Grid>
             </Box>
         </>
