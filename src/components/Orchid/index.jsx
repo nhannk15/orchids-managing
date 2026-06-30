@@ -83,10 +83,10 @@ function Orchid() {
     return (
         <>
             <Box sx={{ paddingRight: "12.5%", paddingLeft: "12.5%", textAlign: "left" }}>
-                <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 0 }}>
+                <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 0, textAlign: "center" }}>
                     Collections
                 </Typography>
-                <Typography variant="h3" sx={{ marginTop: 0, marginBottom: 2 }}>
+                <Typography variant="h3" sx={{ marginTop: 0, marginBottom: 2, textAlign: "center" }}>
                     Discovering the beauty of orchids
                 </Typography>
 

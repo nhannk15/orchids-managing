@@ -13,6 +13,7 @@ function Footer() {
                     theme.palette.mode === 'light'
                         ? theme.palette.grey[200]
                         : theme.palette.grey[800],
+                marginTop: "30px"
             }}
         >
             <Container maxWidth="lg">

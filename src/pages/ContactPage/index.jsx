@@ -30,15 +30,15 @@ function ContactPage() {
     return (
         <>
             <Box sx={{ paddingRight: "12.5%", paddingLeft: "12.5%", textAlign: "left" }}>
-                <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 0, color: "var(--text)" }}>
+                <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 0, color: "var(--text)", textAlign: "center"}}>
                     CONTACT
                 </Typography>
 
-                <Typography variant="h3" sx={{ marginTop: 0 }}>
+                <Typography variant="h3" sx={{ marginTop: 0, textAlign: "center" }}>
                     WE'RE ALWAYS ALL EARS TO YOU
                 </Typography>
 
-                <Typography variant="inherit" sx={{ marginTop: 0, marginBottom: 5 }}>
+                <Typography variant="inherit" sx={{ marginTop: 0, marginBottom: 5, textAlign: "center" }}>
                     Leave the message, we'll contact you within 24 hours.
                 </Typography>
 

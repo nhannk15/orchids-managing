@@ -16,6 +16,7 @@ import SpaIcon from '@mui/icons-material/Spa';
 import StarsIcon from '@mui/icons-material/Stars';
 import Modal from "@mui/material/Modal";
 import Box from '@mui/material/Box';
+import CategoryIcon from '@mui/icons-material/Category';
 
 const style = {
     position: 'absolute',
@@ -85,6 +86,14 @@ function OrchidDetail() {
 
                         <div className="orchid--detail__row">
                             <div className="orchid--detail__col">
+                                <CategoryIcon />
+                                <p>Category</p>
+                            </div>
+                            <p>{orchid.category}</p>
+                        </div>
+
+                        <div className="orchid--detail__row">
+                            <div className="orchid--detail__col">
                                 <ColorLensIcon />
                                 <p>Color</p>
                             </div>
@@ -103,7 +112,7 @@ function OrchidDetail() {
                         {orchid.isNatural && (
                             <div className="orchid--detail__row">
                                 <div className="orchid--detail__col">
-                                    <SpaIcon />
+                                    <SpaIcon color="success"/>
                                     <p>Natural</p>
                                 </div>
                             </div>
@@ -112,7 +121,7 @@ function OrchidDetail() {
                         {orchid.isSpecial && (
                             <div className="orchid--detail__row">
                                 <div className="orchid--detail__col">
-                                    <StarsIcon />
+                                    <StarsIcon color="warning" />
                                     <p>Special</p>
                                 </div>
                             </div>
