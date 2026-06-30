@@ -245,7 +245,8 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
                                 type="submit"
                                 variant="contained"
                                 color="secondary"
-                                startIcon={submitting && <CircularProgress size={20} color="inherit" />}>
+                                startIcon={submitting && <CircularProgress size={20} color="inherit" />}
+                                disabled={submitting}>
                                 Add!
                             </Button>
                         </Box>
@@ -253,7 +254,7 @@ function AddFlowerModal({ open, handleClose, orchid, setLoading, submitting, set
                     </Box>
                 </CardContent>
             </Card>
-        </Modal>
+        </Modal >
     )
 }
 

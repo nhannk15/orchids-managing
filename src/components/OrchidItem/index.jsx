@@ -21,7 +21,7 @@ function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
 
     const [view, setView] = useState(true);
     const [numberOfLikes, setNumberOfLikes] = useState(orchid.numberOfLike);
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(true);
     const [newFlower, setNewFlower] = useState(orchid);
     const [anchorEl, setAnchorEl] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -94,6 +94,10 @@ function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
                         <Typography variant="body2" sx={{ color: "text.secondary" }}>
                             {orchid.desc}
                         </Typography>
+
+                         <Typography variant="body2" color="secondary">
+                            Category: {orchid.category}
+                        </Typography>
                         <Rating name="read-only" value={orchid.rating} readOnly />
                     </CardContent>
 
@@ -126,7 +130,7 @@ function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
                             <Link to={"/orchid/" + orchid.id}>
                                 <Tooltip title="View detail">
                                     <IconButton>
-                                        <InfoOutlinedIcon />
+                                        <InfoOutlinedIcon color="info"/>
                                     </IconButton>
                                 </Tooltip>
 
@@ -142,7 +146,7 @@ function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
                                 <Tooltip title="View special orchids">
                                     <Link to={"/orchid/special"}>
                                         <IconButton>
-                                            <HotelClassIcon />
+                                            <HotelClassIcon color="warning"/>
                                         </IconButton>
                                     </Link>
                                 </Tooltip>
@@ -159,7 +163,7 @@ function OrchidItem({ setLoading, orchid, setOpenUpdateModal, setOrchid }) {
                                 <Tooltip title="View natural orchids">
                                     <Link to={"/orchid/natural"}>
                                         <IconButton>
-                                            <CompostIcon />
+                                            <CompostIcon color="success"/>
                                         </IconButton>
                                     </Link>
                                 </Tooltip>

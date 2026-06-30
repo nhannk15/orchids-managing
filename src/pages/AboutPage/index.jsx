@@ -96,14 +96,15 @@ function AboutPage() {
                         sx={{
                             boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
                             borderRadius: "16px",
-                            marginBottom: "30px"
+                            marginBottom: "30px",
+                            marginTop: "10px"
                         }}>
                         <Box sx={{
                             width: "100%",
                             textAlign: "center",
                             display: "flex",
                             justifyContent: "center",
-                            padding: "30px"
+                            padding: "30px",
                         }}>
                             <Box sx={{ width: "100%", textAlign: "left" }}>
                                 <Box>
@@ -123,7 +124,7 @@ function AboutPage() {
                                             <Typography sx={{ fontSize: "12px" }}>
                                                 Foundation
                                             </Typography>
-                                            <Typography sx={{ fontSize: "12px", color: "text.secondary", mt: 0.5 }}>
+                                            <Typography sx={{ fontSize: "12px", color: "", mt: 0.5 }}>
                                                 Established the company with a vision to revolutionize the industry. Built core team and developed initial product prototypes.
                                             </Typography>
                                         </Box>
@@ -140,7 +141,7 @@ function AboutPage() {
                                         <Typography sx={{ fontSize: "12px" }}>
                                             Transfermatk
                                         </Typography>
-                                        <Typography sx={{ fontSize: "12px", color: "text.secondary", mt: 0.5 }}>
+                                        <Typography sx={{ fontSize: "12px", color: "", mt: 0.5 }}>
                                             Successfully transferred technology and expanded operations to international markets. Established partnerships with key global players.
                                         </Typography>
                                     </Box>
@@ -156,7 +157,7 @@ function AboutPage() {
                                         <Typography sx={{ fontSize: "12px" }}>
                                             Oversea
                                         </Typography>
-                                        <Typography sx={{ fontSize: "12px", color: "text.secondary", mt: 0.5 }}>
+                                        <Typography sx={{ fontSize: "12px", color: "", mt: 0.5 }}>
                                             Expanded presence across Asia and Europe. Served over 300 clients and established regional headquarters in Singapore.
                                         </Typography>
                                     </Box>
@@ -172,7 +173,7 @@ function AboutPage() {
                                         <Typography sx={{ fontSize: "12px" }}>
                                             AI Integrated
                                         </Typography>
-                                        <Typography sx={{ fontSize: "12px", color: "text.secondary", mt: 0.5 }}>
+                                        <Typography sx={{ fontSize: "12px", color: "", mt: 0.5 }}>
                                             Integrated artificial intelligence into core products. Launched AI-powered solutions and achieved market leadership position.
                                         </Typography>
                                     </Box>

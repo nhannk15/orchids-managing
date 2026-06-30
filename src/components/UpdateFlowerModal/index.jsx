@@ -265,6 +265,7 @@ function UpdateFlowerModal({ open, handleClose, orchid, setLoading, setSubmittin
                                     color="secondary"
                                     type="submit"
                                     startIcon={submitting && <CircularProgress size={20} color="inherit" />}
+                                    disabled={submitting}
                                 >
                                     {submitting ? "Updating" : "Update"}
                                 </Button>
