@@ -168,7 +168,10 @@ function Header() {
                     {user == null ? (
                         <Login />
                     ) : (
-                        <Box sx={{ flexGrow: 0 }}>
+                        <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center", gap: "10px" }}>
+                            <Typography sx={{color: "white"}}>
+                                Welcome, {user.name}
+                            </Typography>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar alt="Remy Sharp" src={user == null ? "/static/images/avatar/2.jpg" : user.avatar} />
